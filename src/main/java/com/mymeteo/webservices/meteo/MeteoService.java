@@ -8,6 +8,7 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+
 import com.mymeteo.meteo.Lieu;
 import com.mymeteo.meteo.ObjectFactory;
 import com.mymeteo.meteo.Releve;
@@ -32,12 +33,13 @@ public interface MeteoService {
      * @param partLieu
      * @return
      *     returns com.mymeteo.meteo.Releve
+     * @throws InvalidWebParameter 
      */
     @WebMethod
     @WebResult(name = "releve", targetNamespace = "http://www.mymeteo.com/meteo", partName = "partReleve")
     @Action(input = "http://www.mymeteo.com/webservices/meteo/MeteoService/releveMeteoRequest", output = "http://www.mymeteo.com/webservices/meteo/MeteoService/releveMeteoResponse")
     public Releve releveMeteo(
         @WebParam(name = "lieu", targetNamespace = "http://www.mymeteo.com/meteo", partName = "partLieu")
-        Lieu partLieu);
+        Lieu partLieu) throws InvalidWebParameter;
 
 }
