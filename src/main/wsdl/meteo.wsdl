@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions 
+  xmlns="http://schemas.xmlsoap.org/wsdl/" 
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" 
+  xmlns:tns="http://www.mymeteo.com/webservices/meteo" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:ns1="http://www.mymeteo.com/meteo"
+  targetNamespace="http://www.mymeteo.com/webservices/meteo" 
+  name="MeteoService"
+>
+
+  <!-- Les types de données au format XML schema -->
+  <types>
+    <xs:schema version="1.0" targetNamespace="http://www.mymeteo.com/meteo">
+      <xs:complexType name="temperature">
+        <xs:sequence>
+          <xs:element name="valeur" type="xs:double"/>
+          <xs:element name="unite">
+          	<xs:simpleType>
+          		<xs:restriction base="xs:string">
+          			<xs:enumeration value="celsius"></xs:enumeration>
+          			<xs:enumeration value="fahrenheit"></xs:enumeration>
+          		</xs:restriction>
+          	</xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="lieu">
+        <xs:sequence>
+          <xs:element name="ville" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="releve">
+        <xs:sequence>
+          <xs:element name="temperature" type="ns1:temperature"/>
+          <xs:element name="lieu" type="ns1:lieu"/>
+        </xs:sequence>
+      </xs:complexType>
+
+      <xs:element name="lieu" type="ns1:lieu"/>
+      <xs:element name="releve" type="ns1:releve"/>
+    </xs:schema>
+  </types>
+
+  <!-- 
+    La description de tous les messages possibles.
+    Un message est défini par un ensemble de parties (une partie pour le payload 
+    et une partie par en-tête)
+  -->
+  <message name="releveMeteo">
+    <part name="partLieu" element="ns1:lieu"/>
+  </message>
+
+  <message name="releveMeteoResponse">
+    <part name="partReleve" element="ns1:releve"/>
+  </message>
+
+  <!-- 
+    Description des interfaces (indépendantes de SOAP)
+    Une interface est composée d'un ensemble d'opérations.
+    Chaque opération est définie par les messages en entrée et en sortie.
+  -->
+  <portType name="MeteoService">
+    <operation name="releveMeteo">
+      <input 
+        wsam:Action="http://www.mymeteo.com/webservices/meteo/MeteoService/releveMeteoRequest" 
+        message="tns:releveMeteo"/>
+      <output 
+        wsam:Action="http://www.mymeteo.com/webservices/meteo/MeteoService/releveMeteoResponse" 
+        message="tns:releveMeteoResponse"/>
+    </operation>
+  </portType>
+
+  <!-- Liaison des interfaces avec le protocole SOAP -->
+  <binding name="MeteoServicePortBinding" type="tns:MeteoService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="releveMeteo">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <!-- 
+    Localisation du service 
+    Dans le cas d'un binding SOAP avec un transport HTTP, on trouve ici l'URL du service.
+  -->
+  <service name="MeteoService">
+    <port name="MeteoServicePort" binding="tns:MeteoServicePortBinding">
+      <soap:address location="http://ws-bookmarks.herokuapp.com/"/>
+    </port>
+  </service>
+</definitions>
