@@ -1,11 +1,7 @@
-rest-bookmarks
+WS METEO
 ==============
 
-RESTful web services sample application.
+A sample application that uses JAX-WS to implement a SOAP service.
 
-This application demonstrates the following REST principles:
+This application is configured to be deployed as an heroku app embedding Jetty and Metro (JAX-WS reference implementation).
 
-* Content negociation
-* Hyperlinks to handle navigation
-* Caching
-* Uniform interface
