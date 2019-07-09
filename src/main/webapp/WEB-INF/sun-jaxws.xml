@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
-	<endpoint name="meteoService" implementation="com.mymeteo.webservices.meteo.MeteoServiceImpl" url-pattern="/"/>
+<!-- 
+	Pour déclarer un endpoint
+	
+	<endpoint name="nomduservice" implementation="classe.implementation.du.service" url-pattern="/"/>
+ -->
 </endpoints>

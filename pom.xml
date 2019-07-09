@@ -2,16 +2,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.epsi.i4</groupId>
-	<artifactId>ws-meteo-app</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<groupId>com.github.spoonless</groupId>
+	<artifactId>jaxws-template</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<developers>
-		<developer>
-			<name>David Gayerie</name>
-			<email>david.gayerie.epsi@mailoo.org</email>
-		</developer>
-	</developers>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -20,12 +14,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.0</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.glassfish.metro</groupId>
 			<artifactId>webservices-rt</artifactId>
